@@ -1,0 +1,22 @@
+# Prevents your password file from being copied into the image
+.env
+
+# 2. Python Clutter
+# We install dependencies fresh inside Docker, so we don't want your local ones
+venv/
+__pycache__/
+*.pyc
+
+# 3. Data
+# We mount this as a volume, so don't copy it into the image layer
+data/
+
+# 4. Git History
+.git/
+.gitignore
+
+# 5. dbt Artifacts
+# These are generated when you run dbt; we don't want to overwrite the container's version
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/

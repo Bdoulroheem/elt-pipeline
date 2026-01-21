@@ -1,0 +1,14 @@
+
+
+my_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: pipeline_db
+      port: 5432
+      user: postgres
+      password: root
+      dbname: postgres
+      schema: staging
+      threads: 3
