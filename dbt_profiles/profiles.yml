@@ -1,0 +1,28 @@
+my_pipeline:
+    # set the default target to 'vscode' so my Extension works automatically.
+  target: vscode
+  
+  outputs:
+    #  Configuration for Docker (Internal)
+    # Docker will use this because I will set DBT_TARGET=dev in docker-compose
+    dev:
+      type: postgres
+      threads: 3
+      host: postgres
+      port: 5432
+      user: postgres
+      pass: root
+      dbname: postgres
+      schema: staging
+
+    #  Configuration for VS Code (Local)
+    # The Extension uses this by default now
+    vscode:
+      type: postgres
+      threads: 3
+      host: localhost
+      port: 5432
+      user: postgres
+      pass: root
+      dbname: postgres
+      schema: staging

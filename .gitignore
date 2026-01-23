@@ -1,0 +1,19 @@
+# Security (CRITICAL)
+.env
+
+# Python junk
+__pycache__/
+*.pyc
+venv/
+
+# Data (Too big for git)
+data/
+
+# OS junk
+.DS_Store
+
+# dbt artifacts
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+*.zip
