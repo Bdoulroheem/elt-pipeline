@@ -19,7 +19,8 @@
     "dbt.dbtIntegration": "core",
     // "dbt.profilesDir": "/home/rahim/pipeline/dbt_profiles",
     "dbt.projectDir": "/home/rahim/pipeline/dbt_project",
-    "dbt.target": "vscode"
+    "dbt.target": "vscode",
+    "dbt.perspectiveTheme": "Vintage"
 }
 
 

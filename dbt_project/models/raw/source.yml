@@ -1,8 +1,8 @@
 version: 2
 
 sources:
-  - name: raw
+  - name: raw_layer  
     database: postgres
     schema: public
     tables:
-      - name: raw
+      - name: sales_data  

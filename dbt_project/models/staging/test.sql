@@ -6,7 +6,7 @@
 with source_data as (
 
 select *
-from {{ source('raw', 'raw') }}
+ FROM {{ source('raw_layer', 'sales_data') }}
 
 )
 
