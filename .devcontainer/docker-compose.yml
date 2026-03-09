@@ -1,0 +1,9 @@
+services:
+  pipeline_dev:
+    mem_limit: 6g
+    memswap_limit: 10g
+    command: sleep infinity
+    volumes:
+      - .:/workspace:cached
+    environment:
+      DBT_PROFILES_DIR: /workspace/dbt_profiles
