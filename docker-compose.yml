@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:16
-    container_name: pipeline_db
+
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -16,41 +16,29 @@ services:
       timeout: 5s
       retries: 5
 
-  pipeline:
-    build: .
-    container_name: pipeline_app
+  pipeline_dev:
+    build: . 
+    container_name: pipeline_dev
+    # Keep it alive forever
+    command: sleep infinity
     volumes:
-      - .:/app
+      # Map the WHOLE project to /workspace
+      - .:/workspace
+    working_dir: /workspace
     depends_on:
       postgres:
         condition: service_healthy
     env_file:
       - .env
-    # Explicitly map the host for the python script
+    # Single source of truth for variables
     environment:
-      - POSTGRES_HOST=${DOCKER_DB_HOST}
-    restart: on-failure
-
-  dbt:
-    image: ghcr.io/dbt-labs/dbt-postgres:1.9.0
-    container_name: pipeline_dbt
-    entrypoint: ["tail", "-f", "/dev/null"]
-    volumes:
-      - ./dbt_project:/usr/app/dbt
-      - ./dbt_profiles:/root/.dbt
-    depends_on:
-      postgres:
-        condition: service_healthy
-    env_file:
-      - .env
-    # THE FIX: tell the container that DB_HOST is 'postgres'
-    environment:
-      - DB_HOST=${DOCKER_DB_HOST}
+      - DB_HOST=postgres
+      - DB_PORT=5432
       - DB_USER=${POSTGRES_USER}
       - DB_PASS=${POSTGRES_PASSWORD}
-      - DB_PORT=${POSTGRES_PORT}
       - DB_NAME=${POSTGRES_DB}
+      # For python scripts
+      - POSTGRES_HOST=postgres
 
 volumes:
-  my_pgdata:
-    external: true
+  my_pgdata: {}

@@ -18,3 +18,4 @@ dbt_project/dbt_packages/
 dbt_project/logs/
 *.zip
 .vscode/
+dbt_project/.env
